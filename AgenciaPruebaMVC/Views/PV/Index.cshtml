@@ -1,0 +1,63 @@
+﻿@model IEnumerable<AgenciaPruebaMVC.Models.pvModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<br />
+
+<p>
+    <a href="@Url.Action("Add","PV")" class="btn btn-default"><i class="fa fa-plus"> </i> Create New</a>
+</p>
+
+<table class="table table-striped">
+    <thead class="table-heading">
+        <tr>
+            <th>
+                @Html.DisplayName("Id Cedula")
+            </th>
+            <th>
+                @Html.DisplayName("Id Codigodeviaje")
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fecha)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cedula)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Codigodeviaje)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fecha)
+            </td>
+            <td>
+                <a href="@Url.Action("Edit", "PV", new { id = item.id})" class="btn btn-default"><i class="fa fa-pencil"></i> Edit</a>
+                <a onclick="Delete(@item.id)" class="btn btn-default"><i class="fa fa-trash"></i> Delete</a>
+            </td>
+        </tr>
+    }
+
+</table>
+
+@section scripts{
+    <script>
+        $(function (){
+            var successMessage = '@TempData["SuccessMessage"]'
+            if (successMessage != '') {
+                alertify.success(successMessage);
+            }
+        });
+
+        function Delete(id){
+            alertify.confirm('Web  Api CRUD Operations', 'Are you sure you want to delete?', function () { window.location.href = '@Url.Action("Delete", "PV")/' + id; }, null)
+        }
+    </script>
+}

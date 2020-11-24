@@ -1,0 +1,60 @@
+﻿@model AgenciaPruebaMVC.Models.pvModel
+@{
+    ViewBag.Title = "Add";
+}
+
+<h2>Add</h2>
+
+<div class="form-body">
+    @using (Html.BeginForm())
+    {
+
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.CodigodeViaje)
+                @Html.EditorFor(model => model.CodigodeViaje)
+                @Html.ValidationMessageFor(model => model.CodigodeViaje)
+            </div>*@
+
+        
+        
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Cedula)<br />
+        @*@Html.EditorFor(model => model.Cedula)*@
+
+        @Html.DropDownListFor(model => model.Cedula, (IEnumerable<SelectListItem>)ViewBag.Cedulas, "Seleccione el Codigo de Viaje")
+        @Html.ValidationMessageFor(model => model.Cedula)
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Codigodeviaje)<br/>
+        @*@Html.EditorFor(model => model.Codigodeviaje)*@
+        @Html.DropDownListFor(model => model.Codigodeviaje, (IEnumerable<SelectListItem>)ViewBag.CodViaje, "Seleccione el Codigo de Viaje")
+        @Html.ValidationMessageFor(model => model.Codigodeviaje)
+    </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Fecha)
+            @Html.EditorFor(model => model.Fecha)
+            @Html.ValidationMessageFor(model => model.Fecha)
+        </div>
+
+
+
+
+
+
+        <div class="form-group">
+            <input type="submit" value="Submit" class="btn button" />
+            <input type="reset" value="Reset" class="btn button" />
+
+        </div>
+    }
+
+</div>
+
+
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval");
+}

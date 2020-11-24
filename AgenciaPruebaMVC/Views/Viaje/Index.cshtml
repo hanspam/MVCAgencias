@@ -1,0 +1,73 @@
+﻿@model IEnumerable<AgenciaPruebaMVC.Models.ViajeModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<br />
+
+<p>
+    <a href="@Url.Action("Add","Viaje")" class="btn btn-default"><i class="fa fa-plus"> </i> Create New</a>
+</p>
+<table class="table table-striped">
+    <thead class="table-heading">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CodigodeViaje)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NumeroPlazas)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Destino)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LugarOrigen)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Precio)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CodigodeViaje)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumeroPlazas)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Destino)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LugarOrigen)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Precio)
+            </td>
+            <td>    
+                <a href="@Url.Action("Edit", "Viaje", new { id = item.CodigodeViaje})" class="btn btn-default"><i class="fa fa-pencil"></i> Edit</a>
+                <a onclick="Delete(@item.CodigodeViaje)" class="btn btn-default"><i class="fa fa-trash"></i> Delete</a>
+            </td>
+        </tr>
+    }
+
+</table>
+
+@section scripts{
+    <script>
+        $(function (){
+            var successMessage = '@TempData["SuccessMessage"]'
+            if (successMessage != '') {
+                alertify.success(successMessage);
+            }
+        });
+
+        function Delete(id){
+            alertify.confirm('Web  Api CRUD Operations', 'Are you sure you want to delete?', function () { window.location.href = '@Url.Action("Delete", "Viaje")/' + id; }, null)
+        }
+    </script>
+}
